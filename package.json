@@ -1,0 +1,31 @@
+{
+  "name": "emo",
+  "version": "0.0.1",
+  "description": "Japanese emoticon generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/w33ble/emo.git"
+  },
+  "keywords": [
+    "emoticon",
+    "emoticons",
+    "emote",
+    "emotes",
+    "emoji",
+    "emojis",
+    "kaomoji"
+  ],
+  "author": {
+    "name": "Joe Fleming",
+    "github": "w33ble"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/w33ble/emo/issues"
+  },
+  "homepage": "https://github.com/w33ble/emo"
+}
