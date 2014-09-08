@@ -32,5 +32,9 @@
   "bugs": {
     "url": "https://github.com/w33ble/emo/issues"
   },
-  "homepage": "https://github.com/w33ble/emo"
+  "homepage": "https://github.com/w33ble/emo",
+  "dependencies": {
+    "emoticon-data": "^0.1.1",
+    "lodash": "^2.4.1"
+  }
 }
