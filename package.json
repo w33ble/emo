@@ -1,6 +1,6 @@
 {
   "name": "emo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Japanese emoticon generator",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
