@@ -8,6 +8,7 @@ var emotes = require('../lib/emotes');
 
 cmd
 .version(pkg.version)
+.usage('[options] <tag>')
 .option('-t, --tags', 'list available tags')
 .option('-c, --count <n>', 'specify number to return', parseInt)
 .option('-v, --verbose', 'get verbose info about the selected emoticon(s)')

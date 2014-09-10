@@ -6,17 +6,17 @@ emo - a CLI kaomoji/japanese emoticon generator
 
 # Usage
 
-## No options
+```
+Usage: emo [options] <tag>
 
-`emo`
+Options:
 
-Will return a random kaomoji
-
-## Tag filter
-
-`emo happy`
-
-If you'd like a kaomoji with a specific tag, pass it as the second argument
+  -h, --help       output usage information
+  -V, --version    output the version number
+  -t, --tags       list available tags
+  -c, --count <n>  specify number to return
+  -v, --verbose    get verbose info about the selected emoticon(s)
+```
 
 # License
 
