@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/w33ble/emo",
   "dependencies": {
+    "commander": "^2.3.0",
     "emoticon-data": "^0.1.1",
     "lodash": "^2.4.1"
   }
