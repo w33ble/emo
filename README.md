@@ -15,6 +15,7 @@ Options:
   -V, --version    output the version number
   -t, --tags       list available tags
   -c, --count <n>  specify number to return
+  -p, --clip       copy emoticon(s) to the clipboard
   -v, --verbose    get verbose info about the selected emoticon(s)
 ```
 

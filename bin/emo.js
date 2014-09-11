@@ -5,12 +5,14 @@ var pkg = require('../package.json');
 var cmd = require('commander');
 var table = require('text-table');
 var emotes = require('../lib/emotes');
+var copy = require('copy-paste').silent().copy;
 
 cmd
 .version(pkg.version)
 .usage('[options] <tag>')
 .option('-t, --tags', 'list available tags')
 .option('-c, --count <n>', 'specify number to return', parseInt)
+.option('-p, --clip', 'copy emoticon(s) to the clipboard')
 .option('-v, --verbose', 'get verbose info about the selected emoticon(s)')
 .parse(process.argv);
 
@@ -43,5 +45,11 @@ if (!cmd.verbose) {
   emoticons = _.map(emoticons, JSON.stringify);
 }
 
+var output = emoticons.join("\n");
+
+if(cmd.clip) {
+  copy(output);
+}
+
 // output selection
-console.log(emoticons.join("\n"));
+console.log(output);
