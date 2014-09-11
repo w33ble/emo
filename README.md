@@ -4,7 +4,11 @@ emo - a CLI kaomoji/japanese emoticon generator
 
 `npm -g install emo`
 
+٩(๑ơలơ)۶♡
+
 # Usage
+
+Using `emo` is super simple! ( =①ω①=)
 
 ```
 Usage: emo [options] <tag>
@@ -20,6 +24,10 @@ Options:
   -v, --verbose    get verbose info about the selected emoticon(s)
 ```
 
+(^人^)
+
 # License
 
 The MIT License (MIT) | Copyright (c) 2014 Joe Fleming
+
+(ી(΄◞ิ౪◟ิ‵)ʃ)♥
