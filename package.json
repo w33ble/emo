@@ -37,6 +37,7 @@
     "commander": "^2.3.0",
     "copy-paste": "^0.3.0",
     "emoticon-data": "^0.1.1",
+    "inquirer": "^0.7.1",
     "lodash": "^2.4.1",
     "text-table": "^0.2.0"
   }

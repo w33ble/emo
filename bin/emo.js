@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var pkg = require('../package.json');
 var cmd = require('commander');
+var inquirer = require('inquirer');
 var table = require('text-table');
 var emotes = require('../lib/emotes');
 var copy = require('copy-paste').silent().copy;
@@ -11,6 +12,7 @@ cmd
 .version(pkg.version)
 .usage('[options] [tag]')
 .option('-t, --tags', 'list available tags')
+.option('-s, --select', 'select emoticon tag from a list')
 .option('-c, --count <n>', 'specify number to return', parseInt)
 .option('-p, --clip', 'copy emoticon(s) to the clipboard')
 .option('-v, --verbose', 'get verbose info about the selected emoticon(s)')
@@ -32,25 +34,43 @@ if (cmd.tags) {
   return;
 }
 
-var tag = cmd.args.join(' ');
-var count = cmd.count || 1;
-var emoticons = [];
 
-for (var i = 0; i < count; i++) {
-  emoticons.push(emotes.select(tag));
+function getTag(cb) {
+  // choose tag from list, or parse from args
+  if (cmd.select) {
+    var tags = emotes.getTags();
+    inquirer.prompt({
+      type: 'list',
+      name: 'tag',
+      choices: tags,
+      message: 'Select a tag'
+    }, cb);
+  } else {
+    cb({tag: cmd.args.join(' ')});
+  }
 }
 
-if (!cmd.verbose) {
-  emoticons = _.map(emoticons, 'string');
-} else {
-  emoticons = _.map(emoticons, JSON.stringify);
-}
+getTag(function(answer) {
+  var tag = answer.tag;
+  var count = cmd.count || 1;
+  var emoticons = [];
 
-var output = emoticons.join("\n");
+  for (var i = 0; i < count; i++) {
+    emoticons.push(emotes.select(tag));
+  }
 
-if(cmd.clip) {
-  copy(output);
-}
+  if (!cmd.verbose) {
+    emoticons = _.map(emoticons, 'string');
+  } else {
+    emoticons = _.map(emoticons, JSON.stringify);
+  }
 
-// output selection
-console.log(output);
+  var output = emoticons.join("\n");
+
+  if(cmd.clip) {
+    copy(output);
+  }
+
+  // output selection
+  console.log(output);
+});
