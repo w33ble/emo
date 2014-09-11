@@ -9,17 +9,18 @@ var copy = require('copy-paste').silent().copy;
 
 cmd
 .version(pkg.version)
-.usage('[options] <tag>')
+.usage('[options] [tag]')
 .option('-t, --tags', 'list available tags')
 .option('-c, --count <n>', 'specify number to return', parseInt)
 .option('-p, --clip', 'copy emoticon(s) to the clipboard')
 .option('-v, --verbose', 'get verbose info about the selected emoticon(s)')
 .parse(process.argv);
 
+// show tags it tags flag is set, do nothing else
 if (cmd.tags) {
   var tags = emotes.getTags();
   var tagList = [];
-  var limit = 5;
+  var limit = 5; // number of columns to show
 
   for (var i = 0; i < Math.ceil(tags.length / limit); i++) {
     var start = i * limit;
