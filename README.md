@@ -2,7 +2,7 @@ emo - a CLI kaomoji/japanese emoticon generator
 
 # Installation
 
-`npm -g install emo`
+`npm install -g emo`
 
 ٩(๑ơలơ)۶♡
 
