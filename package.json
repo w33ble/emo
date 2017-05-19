@@ -35,7 +35,7 @@
   "homepage": "https://github.com/w33ble/emo",
   "dependencies": {
     "clipboardy": "^1.1.2",
-    "commander": "^2.3.0",
+    "commander": "^2.9.0",
     "emoticon-data": "^0.2.0",
     "text-table": "^0.2.0"
   },
