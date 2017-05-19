@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 const cmd = require('commander');
-const table = require('text-table');
-const { prompt } = require('inquirer');
 const { writeSync } = require('clipboardy');
 const pkg = require('../package.json');
 const emotes = require('../lib/emotes');
@@ -18,38 +16,9 @@ cmd
 .parse(process.argv);
 
 // show tags it tags flag is set, do nothing else
-if (cmd.tags) {
-  const tags = emotes.getTags();
-  const tagList = [];
-  const limit = 5; // number of columns to show
-
-  for (let i = 0; i < Math.ceil(tags.length / limit); i += 1) {
-    const start = i * limit;
-    const end = (i + 1) * limit;
-
-    tagList.push(tags.slice(start, end));
-  }
-
-  console.log(table(tagList));
-}
-
-function getTag(cb) {
-  // choose tag from list, or parse from args
-  if (cmd.select) {
-    const tags = emotes.getTags();
-    prompt({
-      type: 'list',
-      name: 'tag',
-      choices: tags,
-      message: 'Select a tag',
-    }, cb);
-  } else {
-    cb({ tag: cmd.args.join(' ') });
-  }
-}
-
-getTag((answer) => {
-  const tag = answer.tag || undefined;
+if (cmd.tags) console.log(emotes.showTags());
+else {
+  const tag = cmd.args.join(' ') || undefined;
   const count = cmd.count || 1;
   const emoticons = [];
 
@@ -65,4 +34,4 @@ getTag((answer) => {
 
   // output selection
   console.log(output);
-});
+}
