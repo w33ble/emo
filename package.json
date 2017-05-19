@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "Japanese emoticon generator ヾ(＠゜▽゜＠）ノ",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint bin/**/*.js lib/**/*.js"
   },
   "engines": {
     "node": "^6.0.0"
@@ -40,5 +40,12 @@
     "inquirer": "^0.7.1",
     "lodash": "^2.4.1",
     "text-table": "^0.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.1"
   }
 }
