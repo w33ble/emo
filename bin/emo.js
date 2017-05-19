@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-var _ = require('lodash');
-var pkg = require('../package.json');
-var cmd = require('commander');
-var inquirer = require('inquirer');
-var table = require('text-table');
-var emotes = require('../lib/emotes');
-var copy = require('copy-paste').silent().copy;
+const cmd = require('commander');
+const table = require('text-table');
+const { prompt } = require('inquirer');
+const { writeSync } = require('clipboardy');
+const pkg = require('../package.json');
+const emotes = require('../lib/emotes');
 
 cmd
 .version(pkg.version)
@@ -20,56 +19,49 @@ cmd
 
 // show tags it tags flag is set, do nothing else
 if (cmd.tags) {
-  var tags = emotes.getTags();
-  var tagList = [];
-  var limit = 5; // number of columns to show
+  const tags = emotes.getTags();
+  const tagList = [];
+  const limit = 5; // number of columns to show
 
-  for (var i = 0; i < Math.ceil(tags.length / limit); i++) {
-    var start = i * limit;
-    var end = (i + 1) * limit;
+  for (let i = 0; i < Math.ceil(tags.length / limit); i += 1) {
+    const start = i * limit;
+    const end = (i + 1) * limit;
 
     tagList.push(tags.slice(start, end));
   }
-  console.log(table(tagList));
-  return;
-}
 
+  console.log(table(tagList));
+}
 
 function getTag(cb) {
   // choose tag from list, or parse from args
   if (cmd.select) {
-    var tags = emotes.getTags();
-    inquirer.prompt({
+    const tags = emotes.getTags();
+    prompt({
       type: 'list',
       name: 'tag',
       choices: tags,
-      message: 'Select a tag'
+      message: 'Select a tag',
     }, cb);
   } else {
-    cb({tag: cmd.args.join(' ')});
+    cb({ tag: cmd.args.join(' ') });
   }
 }
 
-getTag(function(answer) {
-  var tag = answer.tag;
-  var count = cmd.count || 1;
-  var emoticons = [];
+getTag((answer) => {
+  const tag = answer.tag || undefined;
+  const count = cmd.count || 1;
+  const emoticons = [];
 
-  for (var i = 0; i < count; i++) {
+  for (let i = 0; i < count; i += 1) {
     emoticons.push(emotes.select(tag));
   }
 
-  if (!cmd.verbose) {
-    emoticons = _.map(emoticons, 'string');
-  } else {
-    emoticons = _.map(emoticons, JSON.stringify);
-  }
+  const output = (!cmd.verbose)
+    ? emoticons.map(e => e.string).join('\n')
+    : emoticons.map(JSON.stringify).join('\n');
 
-  var output = emoticons.join("\n");
-
-  if(cmd.clip) {
-    copy(output);
-  }
+  if (cmd.clip) writeSync(output);
 
   // output selection
   console.log(output);

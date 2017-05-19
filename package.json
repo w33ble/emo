@@ -34,11 +34,10 @@
   },
   "homepage": "https://github.com/w33ble/emo",
   "dependencies": {
+    "clipboardy": "^1.1.2",
     "commander": "^2.3.0",
-    "copy-paste": "^0.3.0",
     "emoticon-data": "^0.2.0",
     "inquirer": "^0.7.1",
-    "lodash": "^2.4.1",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
