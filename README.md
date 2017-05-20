@@ -19,9 +19,9 @@ Using `emo` is super simple! ( =①ω①=)
 Usage: emo [options] [tag]
 
 Options:
-  -t, --tags        List available tags'
-  -c, --count <n>   Specify number to return', parseInt
-  -p, --clip        Copy emoticon(s) to the clipboard'
+  -t, --tags        List available tags
+  -c, --count <n>   Specify number to return
+  -p, --clip        Copy emoticon(s) to the clipboard
   -v, --version     Show version
   --help            Display this help message
   --verbose         Get verbose info about the selected emoticon(s)
