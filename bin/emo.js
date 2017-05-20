@@ -8,7 +8,6 @@ const emotes = require('../lib/emotes');
 const argvOpts = {
   alias: {
     tags: ['t'],
-    select: ['s'],
     count: ['c'],
     clip: ['p'],
     version: ['v'],
