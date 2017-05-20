@@ -1,36 +1,59 @@
 #!/usr/bin/env node
 
-const cmd = require('commander');
+const parser = require('yargs-parser');
 const { writeSync } = require('clipboardy');
 const pkg = require('../package.json');
 const emotes = require('../lib/emotes');
 
-cmd
-.version(pkg.version)
-.usage('[options] [tag]')
-.option('-t, --tags', 'list available tags')
-.option('-c, --count <n>', 'specify number to return', parseInt)
-.option('-p, --clip', 'copy emoticon(s) to the clipboard')
-.option('-v, --verbose', 'get verbose info about the selected emoticon(s)')
-.parse(process.argv);
+const argvOpts = {
+  alias: {
+    tags: ['t'],
+    select: ['s'],
+    count: ['c'],
+    clip: ['p'],
+    version: ['v'],
+  },
+  number: ['count'],
+  boolean: ['clip', 'help', 'verbose', 'version'],
+};
 
-// show tags it tags flag is set, do nothing else
-if (cmd.tags) console.log(emotes.showTags());
+const argv = parser(process.argv.slice(2), argvOpts);
+
+function showHelp() {
+  console.log(`
+Usage: ${pkg.name} [options] [tag]
+
+Options:
+  -t, --tags        List available tags'
+  -c, --count <n>   Specify number to return', parseInt
+  -p, --clip        Copy emoticon(s) to the clipboard'
+  -v, --version     Show version
+  --help            Display this help message
+  --verbose         Get verbose info about the selected emoticon(s)
+  `);
+}
+
+// // show tags it tags flag is set, do nothing else
+if (argv.tags) console.log(emotes.getFormattedTags());
+else if (argv.version) console.log(`v${pkg.version}`);
 else {
-  const tag = cmd.args.join(' ') || undefined;
-  const count = cmd.count || 1;
+  const tag = argv._[0];
+  const count = argv.count || 1;
   const emoticons = [];
 
-  for (let i = 0; i < count; i += 1) {
-    emoticons.push(emotes.select(tag));
+  if (argv.help) showHelp();
+  else {
+    for (let i = 0; i < count; i += 1) {
+      emoticons.push(emotes.select(tag));
+    }
+
+    const output = (!argv.verbose)
+      ? emoticons.map(e => e.string).join('\n')
+      : emoticons.map(JSON.stringify).join('\n');
+
+    if (argv.clip) writeSync(output);
+
+    // output selection
+    console.log(output);
   }
-
-  const output = (!cmd.verbose)
-    ? emoticons.map(e => e.string).join('\n')
-    : emoticons.map(JSON.stringify).join('\n');
-
-  if (cmd.clip) writeSync(output);
-
-  // output selection
-  console.log(output);
 }
