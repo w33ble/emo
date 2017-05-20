@@ -1,6 +1,6 @@
 {
   "name": "emo",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Japanese emoticon generator ヾ(＠゜▽゜＠）ノ",
   "scripts": {
     "test": "eslint bin/**/*.js lib/**/*.js"
