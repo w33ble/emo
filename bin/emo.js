@@ -15,7 +15,7 @@ cmd
 .parse(process.argv);
 
 // show tags it tags flag is set, do nothing else
-if (cmd.tags) console.log(emotes.showTags());
+if (cmd.tags) console.log(emotes.getFormattedTags());
 else {
   const tag = cmd.args.join(' ') || undefined;
   const count = cmd.count || 1;
