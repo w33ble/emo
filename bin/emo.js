@@ -32,10 +32,18 @@ Options:
   `);
 }
 
-// // show tags it tags flag is set, do nothing else
-if (argv.tags) console.log(emotes.getFormattedTags());
-else if (argv.version) console.log(`v${pkg.version}`);
-else {
+// show tags it tags flag is set, do nothing else
+(function emo() {
+  if (argv.tags) {
+    console.log(emotes.getFormattedTags());
+    return;
+  }
+
+  if (argv.version) {
+    console.log(`v${pkg.version}`);
+    return;
+  }
+
   const tag = argv._[0];
   const count = argv.count || 1;
   const emoticons = [];
@@ -55,4 +63,4 @@ else {
     // output selection
     console.log(output);
   }
-}
+}());
