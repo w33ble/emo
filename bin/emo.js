@@ -51,7 +51,8 @@ Options:
   if (argv.help) showHelp();
   else {
     for (let i = 0; i < count; i += 1) {
-      emoticons.push(emotes.select(tag));
+      const selected = emotes.select(tag);
+      if (selected) emoticons.push(selected);
     }
 
     const output = (!argv.verbose)
